@@ -1,4 +1,4 @@
-# AMD ZeroToken AI Router
+# AMD ZeroToken Hybrid AI Router
 
 ![Next.js](https://img.shields.io/badge/Next.js-16-black?style=for-the-badge&logo=next.js)
 ![React](https://img.shields.io/badge/React-19-61DAFB?style=for-the-badge&logo=react&logoColor=black)
@@ -16,7 +16,7 @@ A futuristic AI routing dashboard built with Next.js that visualizes hybrid AI m
 
 ## 🌌 Overview
 
-**AMD ZeroToken AI Router** is a full-stack concept project that combines:
+**AMD ZeroToken Hybrid AI Router** is a full-stack concept project that combines:
 
 1. A **5-layer hybrid AI routing architecture** that answers easy tasks locally (zero API tokens) and escalates only when needed
 2. A **premium Next.js dashboard** that visualizes that pipeline in real time — glassmorphism UI, space-themed backgrounds, and an interactive AI console
