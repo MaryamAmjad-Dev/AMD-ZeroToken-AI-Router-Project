@@ -1,60 +1,136 @@
-# AMD Developer Hackathon: ZeroToken Router
+# AMD ZeroToken AI Router
 
-This project is an advanced AI Agent Router built for **Track 1: General-Purpose AI Agent** of the AMD Developer Hackathon.
+![Next.js](https://img.shields.io/badge/Next.js-16-black?style=for-the-badge&logo=next.js)
+![React](https://img.shields.io/badge/React-19-61DAFB?style=for-the-badge&logo=react&logoColor=black)
+![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?style=for-the-badge&logo=typescript&logoColor=white)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
+![Framer Motion](https://img.shields.io/badge/Framer_Motion-12-0055FF?style=for-the-badge&logo=framer&logoColor=white)
 
-Our goal is simple: **Maximize Accuracy while Minimizing Token Cost**. 
-We achieve this through a highly optimized, 5-layer routing architecture that aggressively answers tasks using zero-token local execution whenever possible, and only escalates to expensive API models when strictly necessary.
+A futuristic AI routing dashboard built with Next.js that visualizes hybrid AI model routing, token optimization, and intelligent model selection through a premium interactive interface.
 
-## The 5-Layer Routing Architecture
+---
 
-1. **Layer 1: Regex Pruning Layer**
-   - **Cost:** 0 tokens
-   - We aggressively strip out conversational filler (e.g. "Can you tell me", "Please output"), polite phrasing, and redundant whitespace before processing. This alone saves a massive amount of output token overhead on every single API call.
+## 🌌 Overview
 
-2. **Layer 2: Semantic Caching Layer (MiniLM)**
-   - **Cost:** 0 tokens
-   - Before any processing, the prompt is embedded using `all-MiniLM-L6-v2`. If the exact semantic meaning exists in our local cache (cosine similarity > 0.85), we instantly return the cached answer, avoiding any generation costs.
+**AMD ZeroToken AI Router** demonstrates a **local-first hybrid routing** concept: simple queries stay on-device, complex ones escalate to premium models — maximizing accuracy while minimizing token cost.
 
-3. **Layer 3: XGBoost Intent Router (Category Bypass)**
-   - **Cost:** 0 tokens
-   - We run a highly optimized XGBoost Machine Learning model (`xgboost_router.json`) to classify the intent of the prompt locally on the CPU in under 5 milliseconds.
+The dashboard turns that pipeline into a **premium AI experience**:
 
-4. **Layer 4: Local Fallback Engine (Qwen 1.5B)**
-   - **Cost:** 0 tokens
-   - Once XGBoost identifies an "easy" category (like Sentiment or basic Factual questions), the query is routed to a fully local `Qwen2.5-1.5B-Instruct` model running via `llama.cpp`. This model runs entirely on the CPU in our container. 
+- **Zero-token routing concept** — Regex pruning, semantic cache, and intent classification before any expensive generation
+- **Local-first visualization** — Watch prompts flow through Regex → MiniLM → XGBoost → Qwen Local or Fireworks API
+- **Premium AI dashboard** — Glassmorphism UI, space-themed backgrounds, smooth motion, and an interactive console
 
-5. **Layer 5: Premium API Shunting (Chain-of-Draft)**
-   - **Cost:** Minimal API rates
-   - Only when a query is classified as highly complex (e.g. Code, Math) is it routed to the premium Fireworks API. We explicitly instruct the model to use Chain-of-Draft (CoD) prompting, forcing it to think efficiently and output minimal tokens.
+---
 
-## How to Run & Judge (Option B)
+## ✨ Features
 
-We have packaged everything to run flawlessly in an isolated environment. 
+### 🖥️ AI Dashboard
+- Real-time style command interface
+- Interactive metric cards (tokens saved, API avoided, accuracy, latency)
+- Live routing pipeline status
 
-### Local Docker Build & Run
+### 🤖 AI Console
+- Immersive chat experience
+- Hybrid routing simulation with thinking phases
+- Model, route, tokens saved, and latency metadata per response
 
-If you wish to build the container locally from this repository:
+### ⚡ Hybrid Router Visualization
+| Layer | Role |
+|--------|------|
+| **Regex** | Prompt pruning & fast-path filters |
+| **Semantic Cache (MiniLM)** | Near-instant cache hits |
+| **XGBoost Router** | Intent / complexity scoring |
+| **Decision** | Qwen Local vs Fireworks API |
 
-1. Clone this repository:
-   ```bash
-   git clone https://github.com/HamzaKhanBUIC/amd-developer-hackathon-track1.git
-   cd amd-developer-hackathon-track1
-   ```
+### 📊 Analytics
+- Token savings & cost comparison views
+- Latency and accuracy insights
+- Usage-style visualizations
 
-2. Build the Docker image (this downloads the 1.5B local model into the container):
-   ```bash
-   docker build -t amd-hackathon-router:latest .
-   ```
+### 🎨 UI Experience
+- Dark / light theme toggle
+- Space AI background & particle atmosphere
+- Glassmorphism surfaces
+- Smooth Framer Motion animations
+- Interactive AI cursor & hover feedback
 
-3. Run the container for evaluation:
-   ```bash
-   docker run --rm \
-     -e FIREWORKS_API_KEY="your-api-key" \
-     -e ALLOWED_MODELS="accounts/fireworks/models/llama-v3p1-8b-instruct,accounts/fireworks/models/llama-v3p1-70b-instruct,accounts/fireworks/models/qwen2p5-coder-32b-instruct" \
-     -e TASK_INPUT_PATH="/data/input.json" \
-     -e TASK_OUTPUT_PATH="/data/output.json" \
-     -v $(pwd)/data:/data \
-     amd-hackathon-router:latest
-   ```
+---
 
-*Note: You can place your `input.json` in a local `data/` folder, and the results will be written to `data/output.json`.*
+## 🛠️ Tech Stack
+
+| Layer | Technologies |
+|--------|----------------|
+| **Framework** | Next.js · React · TypeScript |
+| **Styling** | Tailwind CSS |
+| **Motion** | Framer Motion |
+| **Charts** | Recharts |
+
+---
+
+## 📁 Project Structure
+
+```text
+frontend/
+ ├── app/           # Next.js App Router pages & layout
+├── components/    # Dashboard, chat, landing, effects, UI
+├── hooks/         # Chat, theme, interaction hooks
+├── lib/           # Demo router, utils, route helpers
+ └── types/         # Shared TypeScript types
+```
+
+---
+
+## 🚀 Installation
+
+```bash
+git clone https://github.com/MaryamAmjad-Dev/AMD-ZeroToken-AI-Router-Project.git
+cd AMD-ZeroToken-AI-Router-Project/frontend
+npm install
+npm run dev
+```
+
+Open [http://127.0.0.1:3000](http://127.0.0.1:3000) in your browser.
+
+| Script | Description |
+|--------|-------------|
+| `npm run dev` | Start development server |
+| `npm run build` | Production build |
+| `npm run start` | Serve production build |
+
+---
+
+## 📸 Screenshots
+
+> Add screenshots under `docs/` or `public/screenshots/` and update the paths below.
+
+| View | Preview |
+|------|---------|
+| **Dashboard** | ![Dashboard](docs/screenshots/dashboard.png) |
+| **Analytics** | ![Analytics](docs/screenshots/analytics.png) |
+| **Routing** | ![Routing](docs/screenshots/routing.png) |
+| **AI Console** | ![AI Console](docs/screenshots/ai-console.png) |
+
+---
+
+## 🔮 Future Improvements
+
+- [ ] Live AI API integration
+- [ ] Expanded analytics & historical trends
+- [ ] Advanced routing metrics and confidence scores
+- [ ] Persistent conversation history
+
+---
+
+## 📄 License
+
+This project is available for portfolio and demonstration use.
+
+---
+
+<div align="center">
+
+**Developed by Maryam Amjad**
+
+AMD ZeroToken AI Router · Hybrid AI Routing Dashboard
+
+</div>
