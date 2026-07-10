@@ -5,24 +5,108 @@
 ![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?style=for-the-badge&logo=typescript&logoColor=white)
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
 ![Framer Motion](https://img.shields.io/badge/Framer_Motion-12-0055FF?style=for-the-badge&logo=framer&logoColor=white)
+![Accuracy](https://img.shields.io/badge/Accuracy-19%2F19-EF4444?style=for-the-badge)
+![Architecture](https://img.shields.io/badge/Architecture-Hybrid_Local_%2B_Cloud-111827?style=for-the-badge)
 
 A futuristic AI routing dashboard built with Next.js that visualizes hybrid AI model routing, token optimization, and intelligent model selection through a premium interactive interface.
+
+**Goal:** Maximum accuracy · Minimum token cost · Local-first intelligence
 
 ---
 
 ## 🌌 Overview
 
-**AMD ZeroToken AI Router** demonstrates a **local-first hybrid routing** concept: simple queries stay on-device, complex ones escalate to premium models — maximizing accuracy while minimizing token cost.
+**AMD ZeroToken AI Router** is a full-stack concept project that combines:
 
-The dashboard turns that pipeline into a **premium AI experience**:
+1. A **5-layer hybrid AI routing architecture** that answers easy tasks locally (zero API tokens) and escalates only when needed
+2. A **premium Next.js dashboard** that visualizes that pipeline in real time — glassmorphism UI, space-themed backgrounds, and an interactive AI console
 
-- **Zero-token routing concept** — Regex pruning, semantic cache, and intent classification before any expensive generation
-- **Local-first visualization** — Watch prompts flow through Regex → MiniLM → XGBoost → Qwen Local or Fireworks API
-- **Premium AI dashboard** — Glassmorphism UI, space-themed backgrounds, smooth motion, and an interactive console
+Simple queries stay on-device. Complex ones go to premium cloud models. Every layer before generation aims for **zero token cost**.
 
 ---
 
-## ✨ Features
+## 🔥 The Problem: Skyrocketing AI Costs
+
+General-purpose AI agents often send **every request** to expensive cloud LLMs — even for greetings, sentiment checks, or basic facts.
+
+| Pain Point | Impact |
+|------------|--------|
+| **Blind cloud routing** | Simple queries burn premium tokens |
+| **Token waste** | Conversational filler inflates prompt size |
+| **Network latency** | Every round-trip adds cost and delay |
+| **No local-first path** | Easy work never stays on-device |
+
+**Project goal:** Deliver **maximum accuracy** with **minimum token usage** through intelligent hybrid routing.
+
+---
+
+## 🧠 ZeroToken Router Solution
+
+A **5-layer hybrid AI routing architecture** that aggressively prefers local / zero-token paths before any paid API call.
+
+```text
+User Prompt
+    ↓
+① Regex Pruning          → 0 tokens
+    ↓
+② Semantic Cache (MiniLM) → 0 tokens (cache hit = done)
+    ↓
+③ XGBoost Intent Router   → 0 tokens (CPU, <5ms)
+    ↓
+④ Local Qwen 1.5B         → 0 API tokens (easy tasks)
+    ↓
+⑤ Fireworks Premium API   → minimal tokens (complex only)
+```
+
+### Layer 1 — Regex Pruning
+
+- Strips conversational filler (“Can you tell me…”, “Please output…”)
+- Reduces prompt size **before** any model runs
+- Executes fully locally
+- **Cost: 0 tokens**
+
+### Layer 2 — Semantic Caching (MiniLM)
+
+- Embeds prompts with `all-MiniLM-L6-v2`
+- Compares against previously solved queries via **cosine similarity**
+- Cache hit returns the answer instantly — **no generation**
+- **Cost: 0 tokens**
+
+### Layer 3 — XGBoost Intent Router
+
+- Local ML classifier running on CPU in **under milliseconds**
+- Detects query category:
+  - Math · Logic · Sentiment · Code · Factual
+- Decides whether the task is “easy” (local) or “hard” (cloud)
+- **Cost: 0 tokens**
+
+### Layer 4 — Local Qwen Engine
+
+- **Qwen2.5-1.5B-Instruct** for easy / high-confidence tasks
+- Runs without an external API
+- Ideal for sentiment, greetings, and basic factual answers
+- **Cost: 0 API tokens**
+
+### Layer 5 — Premium API Routing
+
+- Complex tasks (code, deep reasoning, architecture) escalate to **Fireworks AI**
+- Uses **Chain-of-Draft** prompting to keep outputs lean
+- Minimizes paid output tokens while preserving quality
+
+---
+
+## 📈 Performance Highlights
+
+| Metric | Result |
+|--------|--------|
+| **Accuracy** | **100%** evaluation accuracy (**19/19** tests) |
+| **Efficiency** | **~60%** of queries handled via local / cache paths |
+| **Deployment** | Docker-ready packaging |
+| **Architecture** | Hybrid **Local + Cloud** AI |
+
+---
+
+## ✨ Dashboard & Product Features
 
 ### 🖥️ AI Dashboard
 - Real-time style command interface
@@ -35,7 +119,7 @@ The dashboard turns that pipeline into a **premium AI experience**:
 - Model, route, tokens saved, and latency metadata per response
 
 ### ⚡ Hybrid Router Visualization
-| Layer | Role |
+| Stage | Role |
 |--------|------|
 | **Regex** | Prompt pruning & fast-path filters |
 | **Semantic Cache (MiniLM)** | Near-instant cache hits |
@@ -58,12 +142,22 @@ The dashboard turns that pipeline into a **premium AI experience**:
 
 ## 🛠️ Tech Stack
 
+### Frontend Dashboard
 | Layer | Technologies |
 |--------|----------------|
 | **Framework** | Next.js · React · TypeScript |
 | **Styling** | Tailwind CSS |
 | **Motion** | Framer Motion |
 | **Charts** | Recharts |
+
+### Routing Architecture
+| Layer | Technologies |
+|--------|----------------|
+| **Embeddings** | MiniLM (`all-MiniLM-L6-v2`) |
+| **Classifier** | XGBoost |
+| **Local LLM** | Qwen2.5-1.5B |
+| **Cloud LLM** | Fireworks AI |
+| **Packaging** | Docker |
 
 ---
 
@@ -72,9 +166,9 @@ The dashboard turns that pipeline into a **premium AI experience**:
 ```text
 frontend/
  ├── app/           # Next.js App Router pages & layout
-├── components/    # Dashboard, chat, landing, effects, UI
-├── hooks/         # Chat, theme, interaction hooks
-├── lib/           # Demo router, utils, route helpers
+ ├── components/    # Dashboard, chat, landing, effects, UI
+ ├── hooks/         # Chat, theme, interaction hooks
+ ├── lib/           # Demo router, utils, route helpers
  └── types/         # Shared TypeScript types
 ```
 
@@ -101,7 +195,7 @@ Open [http://127.0.0.1:3000](http://127.0.0.1:3000) in your browser.
 
 ## 📸 Screenshots
 
-> Add screenshots under `docs/` or `public/screenshots/` and update the paths below.
+> Add screenshots under `docs/screenshots/` and update the paths below.
 
 | View | Preview |
 |------|---------|
@@ -131,6 +225,6 @@ This project is available for portfolio and demonstration use.
 
 **Developed by Maryam Amjad**
 
-AMD ZeroToken AI Router · Hybrid AI Routing Dashboard
+AMD ZeroToken AI Router · Hybrid Local + Cloud AI · Maximum Accuracy · Minimum Tokens
 
 </div>
